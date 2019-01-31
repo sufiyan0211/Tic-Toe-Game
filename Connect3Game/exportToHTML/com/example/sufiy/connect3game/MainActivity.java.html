@@ -1,0 +1,148 @@
+<html>
+<head>
+<title>MainActivity.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #606366; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(204,120,50); }
+.s1 { color: rgb(169,183,198); }
+.s2 { color: rgb(128,128,128); }
+.s3 { color: rgb(104,151,187); }
+.s4 { color: rgb(106,135,89); }
+</style>
+</head>
+<BODY BGCOLOR="#2b2b2b">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+MainActivity.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">package </span><span class="s1">com.example.sufiy.connect3game</span><span class="s0">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">android.support.v7.app.AppCompatActivity</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.os.Bundle</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.view.View</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.widget.Button</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.widget.GridLayout</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.widget.ImageView</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.widget.TextView</span><span class="s0">;</span><span class="s1"> 
+ 
+ 
+</span><span class="s0">public class </span><span class="s1">MainActivity </span><span class="s0">extends </span><span class="s1">AppCompatActivity { 
+ 
+    </span><span class="s2">// Yellow = 0</span><span class="s1"> 
+    </span><span class="s2">// Red    = 1</span><span class="s1"> 
+    </span><span class="s2">// empty  = 2</span><span class="s1"> 
+ 
+    </span><span class="s0">int </span><span class="s1">ActivePlayer = </span><span class="s3">0</span><span class="s0">;</span><span class="s1"> 
+ 
+    </span><span class="s0">boolean </span><span class="s1">game_is_active  = </span><span class="s0">true ;</span><span class="s1"> 
+ 
+    </span><span class="s0">int</span><span class="s1">[] game_state = {</span><span class="s3">2</span><span class="s0">, </span><span class="s3">2</span><span class="s0">, </span><span class="s3">2</span><span class="s0">, </span><span class="s3">2</span><span class="s0">, </span><span class="s3">2</span><span class="s0">, </span><span class="s3">2</span><span class="s0">, </span><span class="s3">2</span><span class="s0">, </span><span class="s3">2</span><span class="s0">, </span><span class="s3">2</span><span class="s1">}</span><span class="s0">;</span><span class="s1"> 
+    </span><span class="s0">int </span><span class="s1">[][] winning_position = {{</span><span class="s3">0</span><span class="s0">, </span><span class="s3">1</span><span class="s0">, </span><span class="s3">2</span><span class="s1">}</span><span class="s0">, </span><span class="s1">{</span><span class="s3">3</span><span class="s0">, </span><span class="s3">4</span><span class="s0">, </span><span class="s3">5</span><span class="s1">}</span><span class="s0">, </span><span class="s1">{</span><span class="s3">6</span><span class="s0">, </span><span class="s3">7</span><span class="s0">, </span><span class="s3">8</span><span class="s1">}</span><span class="s0">, </span><span class="s1">{</span><span class="s3">0</span><span class="s0">, </span><span class="s3">3</span><span class="s0">, </span><span class="s3">6</span><span class="s1">}</span><span class="s0">, </span><span class="s1">{</span><span class="s3">1</span><span class="s0">, </span><span class="s3">4</span><span class="s0">, </span><span class="s3">7</span><span class="s1">}</span><span class="s0">, </span><span class="s1">{</span><span class="s3">2</span><span class="s0">, </span><span class="s3">5</span><span class="s0">, </span><span class="s3">8</span><span class="s1">}</span><span class="s0">, </span><span class="s1">{</span><span class="s3">0</span><span class="s0">, </span><span class="s3">4</span><span class="s0">, </span><span class="s3">8</span><span class="s1">}</span><span class="s0">, </span><span class="s1">{</span><span class="s3">2</span><span class="s0">, </span><span class="s3">4</span><span class="s0">, </span><span class="s3">6</span><span class="s1">}}</span><span class="s0">;</span><span class="s1"> 
+ 
+    </span><span class="s0">public void </span><span class="s1">dropin(View view){ 
+ 
+        ImageView counter = (ImageView) view</span><span class="s0">;</span><span class="s1"> 
+ 
+        </span><span class="s0">int </span><span class="s1">tapped_counter = Integer.parseInt(counter.getTag().toString())</span><span class="s0">;</span><span class="s1"> 
+ 
+        </span><span class="s0">if</span><span class="s1">(game_state[tapped_counter] == </span><span class="s3">2 </span><span class="s1">&amp;&amp; game_is_active) { 
+ 
+            game_state[tapped_counter] = ActivePlayer</span><span class="s0">;</span><span class="s1"> 
+ 
+            counter.setTranslationY(-</span><span class="s3">2000</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+ 
+            </span><span class="s0">if </span><span class="s1">(ActivePlayer == </span><span class="s3">0</span><span class="s1">) { 
+ 
+                counter.setImageResource(R.drawable.yellow)</span><span class="s0">;</span><span class="s1"> 
+ 
+                ActivePlayer = </span><span class="s3">1</span><span class="s0">;</span><span class="s1"> 
+ 
+            } </span><span class="s0">else </span><span class="s1">{ 
+ 
+                counter.setImageResource(R.drawable.red)</span><span class="s0">;</span><span class="s1"> 
+ 
+                ActivePlayer = </span><span class="s3">0</span><span class="s0">;</span><span class="s1"> 
+            } 
+ 
+            counter.animate().translationYBy(</span><span class="s3">2000</span><span class="s1">).rotationY(</span><span class="s3">3600</span><span class="s1">).setDuration(</span><span class="s3">1000</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+ 
+            String message = </span><span class="s4">&quot;&quot;</span><span class="s0">;</span><span class="s1"> 
+ 
+            </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int</span><span class="s1">[] winningpositons : winning_position) { 
+ 
+                </span><span class="s0">if </span><span class="s1">(game_state[winningpositons[</span><span class="s3">0</span><span class="s1">]] == game_state[winningpositons[</span><span class="s3">1</span><span class="s1">]] &amp;&amp; game_state[winningpositons[</span><span class="s3">1</span><span class="s1">]] == game_state[winningpositons[</span><span class="s3">2</span><span class="s1">]] &amp;&amp; game_state[winningpositons[</span><span class="s3">0</span><span class="s1">]] != </span><span class="s3">2</span><span class="s1">) { 
+ 
+                    game_is_active = </span><span class="s0">false;</span><span class="s1"> 
+ 
+                    </span><span class="s0">if </span><span class="s1">(ActivePlayer == </span><span class="s3">0</span><span class="s1">) { 
+                        message = </span><span class="s4">&quot;Red&quot;</span><span class="s0">;</span><span class="s1"> 
+                    } </span><span class="s0">else </span><span class="s1">{ 
+                        message = </span><span class="s4">&quot;Yellow&quot;</span><span class="s0">;</span><span class="s1"> 
+                    } 
+ 
+                    TextView txt_winner = (TextView) findViewById(R.id.txt_winner)</span><span class="s0">;</span><span class="s1"> 
+                    Button btn_play_again = (Button) findViewById(R.id.btn_play_again)</span><span class="s0">;</span><span class="s1"> 
+ 
+                    txt_winner.setText(message + </span><span class="s4">&quot; has won!&quot;</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+                    txt_winner.setVisibility(View.VISIBLE)</span><span class="s0">;</span><span class="s1"> 
+ 
+                    btn_play_again.setVisibility(View.VISIBLE)</span><span class="s0">;</span><span class="s1"> 
+ 
+ 
+ 
+                } 
+            } 
+ 
+        } 
+ 
+ 
+ 
+    } 
+ 
+ 
+    </span><span class="s0">public void </span><span class="s1">play_again(View view){ 
+ 
+        TextView txt_winner = (TextView) findViewById(R.id.txt_winner)</span><span class="s0">;</span><span class="s1"> 
+        Button btn_play_again = (Button) findViewById(R.id.btn_play_again)</span><span class="s0">;</span><span class="s1"> 
+         
+        txt_winner.setVisibility(View.INVISIBLE)</span><span class="s0">;</span><span class="s1"> 
+ 
+        btn_play_again.setVisibility(View.INVISIBLE)</span><span class="s0">;</span><span class="s1"> 
+ 
+        GridLayout grid = findViewById(R.id.grid)</span><span class="s0">;</span><span class="s1"> 
+ 
+        </span><span class="s0">for</span><span class="s1">(</span><span class="s0">int </span><span class="s1">i=</span><span class="s3">0</span><span class="s0">; </span><span class="s1">i&lt;grid.getChildCount()</span><span class="s0">; </span><span class="s1">i++) { 
+ 
+            ImageView counter = (ImageView) grid.getChildAt(i)</span><span class="s0">;</span><span class="s1"> 
+ 
+            counter.setImageDrawable(</span><span class="s0">null</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+ 
+        } 
+ 
+ 
+        ActivePlayer = </span><span class="s3">0</span><span class="s0">;</span><span class="s1"> 
+ 
+        game_is_active  = </span><span class="s0">true ;</span><span class="s1"> 
+ 
+        </span><span class="s0">for</span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s3">0</span><span class="s0">; </span><span class="s1">i&lt;game_state.length</span><span class="s0">; </span><span class="s1">i++){ 
+            game_state[i] = </span><span class="s3">2</span><span class="s0">;</span><span class="s1"> 
+        } 
+ 
+ 
+    } 
+ 
+    @Override 
+    </span><span class="s0">protected void </span><span class="s1">onCreate(Bundle savedInstanceState) { 
+        </span><span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span><span class="s0">;</span><span class="s1"> 
+        setContentView(R.layout.activity_main)</span><span class="s0">;</span><span class="s1"> 
+ 
+ 
+ 
+    } 
+} 
+</span></pre>
+</body>
+</html>
